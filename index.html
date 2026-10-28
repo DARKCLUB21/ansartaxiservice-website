@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ANSARTAXISERVICE | Goa Taxi & Airport Transfers</title>
+  <meta name="description" content="Book a taxi in Goa with ANSARTAXISERVICE. Enquire about airport transfers, local taxi services, Goa sightseeing and outstation trips. Call or WhatsApp us for your journey.">
+  <meta name="theme-color" content="#101820">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <meta property="og:title" content="ANSARTAXISERVICE | Goa Taxi Booking">
+  <meta property="og:description" content="Airport transfers, local taxi, sightseeing and outstation taxi enquiries in Goa.">
+  <meta property="og:type" content="website">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a class="brand" href="#home" aria-label="ANSARTAXISERVICE Home">
+        <span class="brand-icon">A</span>
+        <span>ANSAR<span class="brand-accent">TAXI</span>SERVICE</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle"
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+              aria-controls="mainNav">
+        ☰
+      </button>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#services">Our Services</a>
+        <a href="#vehicles">Vehicles</a>
+        <a href="#about">Why Choose Us</a>
+        <a class="nav-cta" href="#booking">Book a Taxi ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="status-dot"></span> YOUR JOURNEY STARTS HERE</span>
+
+          <h1>Explore Goa.<br>We'll <span>Drive You.</span></h1>
+
+          <p>
+            Airport transfers, local rides, sightseeing and outstation
+            journeys. Tell us where you're going, and let's plan your ride.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#booking" class="btn btn-primary">Book Your Taxi <span>↗</span></a>
+            <a href="tel:+918660629533" class="btn btn-outline">Call Now</a>
+          </div>
+
+          <div class="hero-note">
+            <span>✓</span> Booking enquiries directly with our team
+          </div>
+        </div>
+
+        <div class="booking-card" id="booking">
+          <div class="card-heading">
+            <span class="card-kicker">PLAN YOUR JOURNEY</span>
+            <h2>Where can we take you?</h2>
+            <p>Share your trip details to request a taxi.</p>
+          </div>
+
+          <form id="bookingForm">
+            <div class="field-group">
+              <label for="service">Choose your service</label>
+              <select id="service" name="service" required>
+                <option value="">Select a service</option>
+                <option value="Airport Transfer">Airport Transfer</option>
+                <option value="Local Taxi">Local Taxi</option>
+                <option value="Goa Sightseeing">Goa Sightseeing</option>
+                <option value="Outstation Trip">Outstation Trip</option>
+              </select>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group">
+                <label for="pickup">Pickup location</label>
+                <input id="pickup" name="pickup" type="text"
+                       placeholder="e.g. Mapusa" maxlength="120" required>
+              </div>
+
+              <div class="field-group">
+                <label for="destination">Destination</label>
+                <input id="destination" name="destination" type="text"
+                       placeholder="Where to?" maxlength="120" required>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group">
+                <label for="travelDate">Travel date</label>
+                <input id="travelDate" name="travelDate" type="date" required>
+              </div>
+
+              <div class="field-group">
+                <label for="travelTime">Pickup time</label>
+                <input id="travelTime" name="travelTime" type="time" required>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group">
+                <label for="tripType">Trip type</label>
+                <select id="tripType" name="tripType" required>
+                  <option value="One-way">One-way</option>
+                  <option value="Round trip">Round trip</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="vehicle">Vehicle preference</label>
+                <select id="vehicle" name="vehicle" required>
+                  <option value="">Choose vehicle</option>
+                  <option value="4-seater">4-seater</option>
+                  <option value="Maruti Ertiga">Maruti Ertiga</option>
+                  <option value="Toyota Innova">Toyota Innova</option>
+                  <option value="Kia Carens">Kia Carens</option>
+                  <option value="Toyota Innova Crysta">Innova Crysta</option>
+                  <option value="Toyota Innova Hycross">Innova Hycross</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="passengers">Number of passengers</label>
+              <select id="passengers" name="passengers" required>
+                <option value="1">1 passenger</option>
+                <option value="2">2 passengers</option>
+                <option value="3">3 passengers</option>
+                <option value="4">4 passengers</option>
+                <option value="5">5 passengers</option>
+                <option value="6">6 passengers</option>
+                <option value="7">7 passengers</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="customerName">Your name</label>
+              <input id="customerName" name="customerName" type="text"
+                     placeholder="Enter your name" maxlength="100" required>
+            </div>
+
+            <div class="field-group">
+              <label for="customerPhone">Your mobile number</label>
+              <input id="customerPhone" name="customerPhone" type="tel"
+                     inputmode="tel" autocomplete="tel"
+                     placeholder="Enter your mobile number"
+                     pattern="[+]?[0-9 ()-]{8,20}"
+                     maxlength="20" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn">
+              Request Booking on WhatsApp <span>↗</span>
+            </button>
+
+            <p class="form-disclaimer">
+              Your request will open WhatsApp. Your booking is not confirmed
+              until our team confirms availability and the fare.
+            </p>
+
+            <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="container hero-bottom-inner">
+          <span>LOCAL TAXI</span>
+          <span class="bottom-divider"></span>
+          <span>AIRPORT TRANSFERS</span>
+          <span class="bottom-divider"></span>
+          <span>GOA SIGHTSEEING</span>
+          <span class="bottom-divider"></span>
+          <span>OUTSTATION TRIPS</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services-section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">TRAVEL YOUR WAY</span>
+          <h2>One taxi service.<br><span>Every kind of journey.</span></h2>
+          <p>Choose your journey and contact us to discuss your travel requirements.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-number">01</div>
+            <div class="service-icon" aria-hidden="true">✈</div>
+            <h3>Airport Transfers</h3>
+            <p>Plan your pickup or drop-off to Goa's airports with a pre-arranged taxi.</p>
+            <a href="#booking" data-service="Airport Transfer">Enquire now <span>↗</span></a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">02</div>
+            <div class="service-icon" aria-hidden="true">↗</div>
+            <h3>Local Taxi</h3>
+            <p>Arrange rides for local travel, appointments, shopping and everyday journeys.</p>
+            <a href="#booking" data-service="Local Taxi">Enquire now <span>↗</span></a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">03</div>
+            <div class="service-icon" aria-hidden="true">☀</div>
+            <h3>Goa Sightseeing</h3>
+            <p>Plan a trip around Goa's beaches, landmarks, markets and attractions.</p>
+            <a href="#booking" data-service="Goa Sightseeing">Enquire now <span>↗</span></a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">04</div>
+            <div class="service-icon" aria-hidden="true">➜</div>
+            <h3>Outstation Trips</h3>
+            <p>Discuss intercity travel, longer journeys and return-trip requirements.</p>
+            <a href="#booking" data-service="Outstation Trip">Enquire now <span>↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section vehicles-section" id="vehicles">
+      <div class="container vehicles-layout">
+        <div class="section-heading">
+          <span class="eyebrow">CHOOSE YOUR RIDE</span>
+          <h2>The right vehicle<br><span>for your journey.</span></h2>
+          <p>Tell us your group size and luggage requirements. We'll discuss suitable vehicle options and availability.</p>
+          <a class="btn btn-dark" href="#booking">Choose a Vehicle ↗</a>
+        </div>
+
+        <div class="vehicle-list">
+          <article class="vehicle-item">
+            <div class="vehicle-icon" aria-hidden="true">🚕</div>
+            <div><h3>4-Seater Taxi</h3><p>For smaller groups and everyday travel</p></div>
+            <a href="#booking" data-vehicle="4-seater" aria-label="Enquire about 4-seater taxi">↗</a>
+          </article>
+
+          <article class="vehicle-item">
+            <div class="vehicle-icon" aria-hidden="true">🚙</div>
+            <div><h3>Maruti Ertiga</h3><p>For family trips and group travel</p></div>
+            <a href="#booking" data-vehicle="Maruti Ertiga" aria-label="Enquire about Maruti Ertiga">↗</a>
+          </article>
+
+          <article class="vehicle-item">
+            <div class="vehicle-icon" aria-hidden="true">🚙</div>
+            <div><h3>Innova / Kia Carens</h3><p>For comfortable group journeys</p></div>
+            <a href="#booking" data-vehicle="Toyota Innova" aria-label="Enquire about Innova or Carens">↗</a>
+          </article>
+
+          <article class="vehicle-item">
+            <div class="vehicle-icon" aria-hidden="true">🚘</div>
+            <div><h3>Crysta / Hycross</h3><p>For premium family and business travel</p></div>
+            <a href="#booking" data-vehicle="Toyota Innova Crysta" aria-label="Enquire about Crysta or Hycross">↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section why-section" id="about">
+      <div class="container why-layout">
+        <div>
+          <span class="eyebrow">YOUR JOURNEY MATTERS</span>
+          <h2>Travel with a plan.<br><span>Book with confidence.</span></h2>
+          <p>Clear trip details help us understand your requirements and respond with the right vehicle and fare information.</p>
+        </div>
+
+        <div class="why-points">
+          <div class="why-point"><span>01</span><div><h3>Direct Enquiries</h3><p>Speak to our team about your journey.</p></div></div>
+          <div class="why-point"><span>02</span><div><h3>Vehicle Options</h3><p>Ask about available vehicles for your group.</p></div></div>
+          <div class="why-point"><span>03</span><div><h3>Trip Details in Advance</h3><p>Share your pickup, destination and schedule.</p></div></div>
+          <div class="why-point"><span>04</span><div><h3>Fare Confirmation</h3><p>Confirm the fare and availability before travelling.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <div>
+          <span class="eyebrow">READY TO PLAN YOUR RIDE?</span>
+          <h2>Your next Goa journey<br>starts with a message.</h2>
+        </div>
+        <div class="final-cta-actions">
+          <a class="btn btn-primary" href="#booking">Request a Booking ↗</a>
+          <a class="btn btn-outline" href="https://wa.me/918660629533" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <a class="brand footer-brand" href="#home">
+        <span class="brand-icon">A</span>
+        <span>ANSAR<span class="brand-accent">TAXI</span>SERVICE</span>
+      </a>
+
+      <div class="footer-contact">
+        <span>Plan your next journey</span>
+        <a href="tel:+918660629533">+91 86606 29533</a>
+        <a href="https://wa.me/918660629533" target="_blank" rel="noopener noreferrer">WhatsApp us ↗</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="currentYear">2026</span> ANSARTAXISERVICE. All rights reserved.</p>
+      <p>Taxi booking enquiries in Goa and for outstation travel.</p>
+    </div>
+  </footer>
+
+  <div class="floating-actions" aria-label="Contact ANSARTAXISERVICE">
+    <a class="float-whatsapp" href="https://wa.me/918660629533" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">WA</a>
+    <a class="float-call" href="tel:+918660629533" aria-label="Call ANSARTAXISERVICE">☎</a>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
