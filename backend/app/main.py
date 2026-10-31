@@ -6,6 +6,7 @@ from slowapi import _rate_limit_exceeded_handler
 
 from app.api.bookings import router as bookings_router
 from app.api.admin import router as admin_router
+from app.api.routes import router as routes_router
 from app.core.config import settings
 from app.core.limiter import limiter
 
@@ -42,3 +43,5 @@ def health_check():
 
 app.include_router(bookings_router, prefix="/api")
 app.include_router(admin_router, prefix="/api")
+
+app.include_router(routes_router, prefix="/api")
