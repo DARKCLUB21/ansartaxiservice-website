@@ -107,7 +107,16 @@
 
             <div class="field-row">
               <div class="field-group">
-                <label for="travelDate">Travel date</label>
+                <input type="hidden" id="pickupPlaceId" name="pickup_place_id">
+              <input type="hidden" id="destinationPlaceId" name="destination_place_id">
+              <input type="hidden" id="pickupLat" name="pickup_lat">
+              <input type="hidden" id="pickupLng" name="pickup_lng">
+              <input type="hidden" id="destinationLat" name="destination_lat">
+              <input type="hidden" id="destinationLng" name="destination_lng">
+              <p id="routeEstimate" class="route-estimate" role="status" aria-live="polite">
+                Select pickup and destination from the suggestions to calculate route distance.
+              </p>
+              <label for="travelDate">Travel date</label>
                 <input id="travelDate" name="travelDate" type="date" required>
               </div>
 
@@ -332,6 +341,7 @@
     <a class="float-call" href="tel:+918660629533" aria-label="Call ANSARTAXISERVICE">☎</a>
   </div>
 
+  <script src="config.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>

@@ -1098,3 +1098,15 @@ select:focus-visible {
     padding: 19px 13px;
   }
 }
+
+
+.route-estimate {
+  margin: 0;
+  padding: 10px 12px;
+  color: #596267;
+  background: #f5f3ed;
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1.6;
+}
