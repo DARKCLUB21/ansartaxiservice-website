@@ -8,6 +8,7 @@ from app.core.database import get_db
 from app.core.dependencies import require_admin
 from app.core.security import verify_password
 from app.models.booking import Booking
+from app.models.audit_log import BookingAuditLog
 from app.schemas.admin import AdminLogin, AdminToken, BookingStatusUpdate
 from app.schemas.booking import BookingResponse
 
@@ -92,10 +93,19 @@ def update_booking_status(
     if booking is None:
         raise HTTPException(status_code=404, detail="Booking not found.")
 
+    old_status = booking.status
     booking.status = payload.status
     booking.admin_note = payload.admin_note
 
     try:
+        if old_status != payload.status:
+            db.add(BookingAuditLog(
+                booking_id=booking.booking_id,
+                old_status=old_status,
+                new_status=payload.status,
+                changed_by=admin,
+                admin_note=payload.admin_note,
+            ))
         db.commit()
         db.refresh(booking)
         return booking
@@ -105,3 +115,34 @@ def update_booking_status(
             status_code=503,
             detail="Booking update failed. Please try again.",
         )
+
+
+
+@router.get("/bookings/{booking_id}/history")
+def get_booking_history(
+    booking_id: str,
+    admin: str = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    booking = db.scalar(
+        select(Booking).where(Booking.booking_id == booking_id)
+    )
+    if booking is None:
+        raise HTTPException(status_code=404, detail="Booking not found.")
+
+    logs = db.scalars(
+        select(BookingAuditLog)
+        .where(BookingAuditLog.booking_id == booking_id)
+        .order_by(BookingAuditLog.created_at.desc())
+    ).all()
+
+    return [
+        {
+            "old_status": log.old_status,
+            "new_status": log.new_status,
+            "changed_by": log.changed_by,
+            "admin_note": log.admin_note,
+            "created_at": log.created_at,
+        }
+        for log in logs
+    ]

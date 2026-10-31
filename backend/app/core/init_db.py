@@ -1,5 +1,6 @@
 from app.core.database import Base, engine
 from app.models.booking import Booking
+from app.models.audit_log import BookingAuditLog
 
 
 def initialize_database():
