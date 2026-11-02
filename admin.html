@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101820">
+  <title>Admin Dashboard | ANSAR TAXI SERVICE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="config.js" defer></script>
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-icon">A</span> ANSAR<span>TAXI</span>SERVICE</a>
+    <div id="adminHeader" class="hidden">
+      <span id="adminIdentity">Administrator</span>
+      <button id="logoutBtn" class="btn btn-outline">Logout</button>
+    </div>
+  </header>
+  <main class="container">
+    <section id="loginPanel" class="login-card">
+      <p class="eyebrow">SECURE ACCESS</p>
+      <h1>Admin Login</h1>
+      <p class="muted">Sign in to manage taxi booking enquiries.</p>
+      <form id="loginForm">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username" required maxlength="100">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button class="btn btn-primary full" type="submit">Login securely</button>
+      </form>
+      <p id="loginMessage" class="message" role="status"></p>
+    </section>
+    <section id="dashboard" class="hidden">
+      <div class="page-heading">
+        <div><p class="eyebrow">BOOKING MANAGEMENT</p><h1>Admin Dashboard</h1><p class="muted">Review enquiries and manage booking status.</p></div>
+        <button id="refreshBtn" class="btn btn-outline">↻ Refresh</button>
+      </div>
+      <div class="stats">
+        <article><span>Total loaded</span><strong id="totalCount">0</strong></article>
+        <article><span>Pending</span><strong id="pendingCount">0</strong></article>
+        <article><span>Confirmed</span><strong id="confirmedCount">0</strong></article>
+        <article><span>Rejected</span><strong id="rejectedCount">0</strong></article>
+      </div>
+      <div class="toolbar">
+        <div id="filters" class="filters">
+          <button class="filter active" data-status="">All</button>
+          <button class="filter" data-status="Pending">Pending</button>
+          <button class="filter" data-status="Confirmed">Confirmed</button>
+          <button class="filter" data-status="Rejected">Rejected</button>
+        </div>
+        <form id="searchForm" class="search-form">
+          <input id="searchInput" placeholder="Search booking ID" maxlength="24" aria-label="Search booking ID">
+          <button class="btn btn-primary" type="submit">Search</button>
+          <button class="btn btn-outline" id="clearSearch" type="button">Clear</button>
+        </form>
+      </div>
+      <p id="dashboardMessage" class="message" role="status"></p>
+      <div id="bookingList" class="booking-list"></div>
+      <div class="pagination">
+        <button id="prevBtn" class="btn btn-outline">← Previous</button>
+        <span id="pageLabel">Page 1</span>
+        <button id="nextBtn" class="btn btn-outline">Next →</button>
+      </div>
+    </section>
+  </main>
+  <dialog id="bookingDialog">
+    <div class="dialog-heading">
+      <div><p class="eyebrow">BOOKING DETAILS</p><h2 id="dialogBookingId">Booking</h2></div>
+      <button id="closeDialog" class="close-btn" aria-label="Close">×</button>
+    </div>
+    <div id="bookingDetails"></div>
+    <section class="admin-actions">
+      <h3>Update booking</h3>
+      <label for="adminNote">Admin note</label>
+      <textarea id="adminNote" maxlength="1000" rows="3" placeholder="Optional note for this booking"></textarea>
+      <div class="action-buttons">
+        <button id="confirmBtn" class="btn btn-success">Confirm booking</button>
+        <button id="rejectBtn" class="btn btn-danger">Reject booking</button>
+      </div>
+      <a id="customerWhatsApp" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">Contact customer on WhatsApp</a>
+    </section>
+    <section class="history-section">
+      <h3>Status history</h3>
+      <div id="bookingHistory" class="history-list">Loading history…</div>
+    </section>
+    <p id="dialogMessage" class="message" role="status"></p>
+  </dialog>
+</body>
+</html>

@@ -120,3 +120,41 @@ def test_history_endpoint_requires_admin(audit_client):
         "/api/admin/bookings/ANS-AUDIT12345/history"
     )
     assert response.status_code == 401
+
+
+def test_admin_stats_returns_actual_booking_counts(audit_client):
+    client, headers, _ = audit_client
+
+    response = client.get("/api/admin/stats", headers=headers)
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "total": 1,
+        "pending": 1,
+        "confirmed": 0,
+        "rejected": 0,
+    }
+
+    client.patch(
+        "/api/admin/bookings/ANS-AUDIT12345",
+        headers=headers,
+        json={"status": "Confirmed", "admin_note": "Verified"},
+    )
+
+    response = client.get("/api/admin/stats", headers=headers)
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "total": 1,
+        "pending": 0,
+        "confirmed": 1,
+        "rejected": 0,
+    }
+
+
+def test_admin_stats_requires_authentication(audit_client):
+    client, _, _ = audit_client
+
+    response = client.get("/api/admin/stats")
+
+    assert response.status_code == 401

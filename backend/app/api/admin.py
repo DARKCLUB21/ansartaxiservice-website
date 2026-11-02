@@ -10,7 +10,7 @@ from app.core.security import verify_password
 from app.models.booking import Booking
 from app.models.audit_log import BookingAuditLog
 from app.schemas.admin import AdminLogin, AdminToken, BookingStatusUpdate
-from app.schemas.booking import BookingResponse
+from app.schemas.booking import AdminBookingResponse
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 
@@ -43,7 +43,32 @@ def admin_login(payload: AdminLogin):
     )
 
 
-@router.get("/bookings", response_model=list[BookingResponse])
+@router.get("/stats")
+def admin_booking_stats(
+    admin: str = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    from sqlalchemy import func
+
+    rows = db.execute(
+        select(Booking.status, func.count(Booking.id))
+        .group_by(Booking.status)
+    ).all()
+
+    counts = {"Pending": 0, "Confirmed": 0, "Rejected": 0}
+    for booking_status, count in rows:
+        if booking_status in counts:
+            counts[booking_status] = count
+
+    return {
+        "total": sum(counts.values()),
+        "pending": counts["Pending"],
+        "confirmed": counts["Confirmed"],
+        "rejected": counts["Rejected"],
+    }
+
+
+@router.get("/bookings", response_model=list[AdminBookingResponse])
 def list_bookings(
     status_filter: str | None = Query(default=None, alias="status"),
     search: str | None = Query(default=None, max_length=24),
@@ -66,7 +91,7 @@ def list_bookings(
     return db.scalars(query).all()
 
 
-@router.get("/bookings/{booking_id}", response_model=BookingResponse)
+@router.get("/bookings/{booking_id}", response_model=AdminBookingResponse)
 def get_booking(
     booking_id: str,
     admin: str = Depends(require_admin),
@@ -80,7 +105,7 @@ def get_booking(
     return booking
 
 
-@router.patch("/bookings/{booking_id}", response_model=BookingResponse)
+@router.patch("/bookings/{booking_id}", response_model=AdminBookingResponse)
 def update_booking_status(
     booking_id: str,
     payload: BookingStatusUpdate,

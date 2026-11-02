@@ -117,3 +117,25 @@ class BookingResponse(BaseModel):
     travel_time: time
     distance_km: float | None
     estimated_fare: float | None
+
+
+class AdminBookingResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    booking_id: str
+    status: str
+    customer_name: str
+    customer_phone: str
+    service: str
+    pickup: str
+    destination: str
+    travel_date: date
+    travel_time: time
+    trip_type: str
+    vehicle: str
+    passengers: int
+    distance_km: float | None
+    estimated_fare: float | None
+    admin_note: str | None
+    created_at: datetime
+    updated_at: datetime
