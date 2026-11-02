@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.limiter import limiter
 from app.models.booking import Booking
 from app.schemas.booking import BookingCreate, BookingResponse
 
@@ -14,7 +15,8 @@ router = APIRouter(prefix="/bookings", tags=["Bookings"])
     response_model=BookingResponse,
     status_code=status.HTTP_201_CREATED,
 )
-def create_booking(payload: BookingCreate, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def create_booking(request: Request, payload: BookingCreate, db: Session = Depends(get_db)):
     booking = Booking(**payload.model_dump())
 
     try:

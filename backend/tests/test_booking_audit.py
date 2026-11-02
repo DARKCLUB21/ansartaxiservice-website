@@ -10,6 +10,7 @@ from app.main import app
 from app.core.database import Base, get_db
 from app.core.config import settings
 from app.core.security import hash_password
+from app.core.limiter import limiter
 from app.models.booking import Booking
 from app.models.audit_log import BookingAuditLog
 
@@ -56,6 +57,8 @@ def audit_client():
         )
         db.add(booking)
         db.commit()
+
+    limiter.reset()
 
     with TestClient(app) as client:
         login = client.post(

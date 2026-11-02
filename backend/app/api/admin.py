@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.auth import create_access_token, ACCESS_TOKEN_MINUTES
 from app.core.config import settings
 from app.core.database import get_db
+from app.core.limiter import limiter
 from app.core.dependencies import require_admin
 from app.core.security import verify_password
 from app.models.booking import Booking
@@ -16,7 +17,8 @@ router = APIRouter(prefix="/admin", tags=["Admin"])
 
 
 @router.post("/login", response_model=AdminToken)
-def admin_login(payload: AdminLogin):
+@limiter.limit("5/minute")
+def admin_login(request: Request, payload: AdminLogin):
     if not settings.admin_password_hash or not settings.secret_key:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
