@@ -1,3 +1,4 @@
+from fastapi import HTTPException, status
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
@@ -38,7 +39,10 @@ if settings.database_url:
 
 def get_db():
     if SessionLocal is None:
-        raise RuntimeError("DATABASE_URL is not configured.")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database is not configured. Please try again later.",
+        )
 
     db = SessionLocal()
     try:
