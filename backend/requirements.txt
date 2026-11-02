@@ -8,4 +8,3 @@ pwdlib[argon2]
 PyJWT[crypto]
 slowapi
 httpx
-httpx2
